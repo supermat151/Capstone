@@ -8,18 +8,18 @@ from gpiozero import Motor
 GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
-GPIO_TRIGGERright = 8
-GPIO_ECHOright = 25
+GPIO_TRIGGERright = 24
+GPIO_ECHOright = 23
 
 GPIO_TRIGGERmiddle = 15
 GPIO_ECHOmiddle = 14
 
-GPIO_TRIGGERleft = 24
-GPIO_ECHOleft = 23
+GPIO_TRIGGERleft = 8
+GPIO_ECHOleft = 25
 
 #Setting Motors
-motorleft = Motor(19, 26)
-motorright = Motor(6, 13)
+motorleft = Motor(26, 19)
+motorright = Motor(13, 6)
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGERmiddle, GPIO.OUT)
