@@ -3,6 +3,9 @@ import RPi.GPIO as GPIO
 import time
 import random
 from gpiozero import Motor
+ 
+leftCounter = 0
+rightCounter = 0
 
 #Timeout
 maxtime_right = 0.04
@@ -164,6 +167,7 @@ if __name__ == '__main__':
             time.sleep(0.05)
 
             if distLeft < 15.0:
+                rightCounter += 1
                 motorleft.stop()
                 motorright.stop()
                 time.sleep(1)
@@ -177,7 +181,8 @@ if __name__ == '__main__':
                 time.sleep(1)
 
             elif distRight < 15.0:
-              motorleft.stop()
+                leftCounter += 1
+                motorleft.stop()
                 motorright.stop()
                 time.sleep(1)
 
@@ -191,8 +196,6 @@ if __name__ == '__main__':
 
             elif distMid < 25.0:
 
-                X = random.randint(0,1)
-
                 motorleft.stop()
                 motorright.stop()
                 time.sleep(1)
@@ -202,32 +205,67 @@ if __name__ == '__main__':
                 time.sleep(1)
 
                 #THIS SHIT GO LEFT
-                if X == 1:
-                    motorleft.stop()
-                    motorright.stop()
-                    time.sleep(1)
+                if leftCounter = rightCounter:
+                    X = random.randint(0,1)
+                    
+                    #this shit go left
+                    if X == 0:
+                        leftCounter += 1
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
 
-                    motorleft.backward(0.35)
-                    motorright.forward(0.35)
-                    time.sleep(0.4)
+                        motorleft.backward(0.35)
+                        motorright.forward(0.35)
+                        time.sleep(0.4)
 
-                    motorleft.stop()
-                    motorright.stop()
-                    time.sleep(1)
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
 
-                #THIS SHIT GO RIGHT
-                else:
-                    motorleft.stop()
-                    motorright.stop()
-                    time.sleep(1)
+                    #THIS SHIT GO RIGHT
+                    else:
+                        rightCounter += 1
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
 
-                    motorleft.forward(0.35)
-                    motorright.backward(0.35)
-                    time.sleep(0.4)
+                        motorleft.forward(0.35)
+                        motorright.backward(0.35)
+                        time.sleep(0.4)
 
-                    motorleft.stop()
-                    motorright.stop()
-                    time.sleep(1)
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
+                        
+                    elif leftCounter > rightCounter:
+                        rightCounter += 1
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
+
+                        motorleft.forward(0.35)
+                        motorright.backward(0.35)
+                        time.sleep(0.4)
+
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
+                        
+                    elif rightCounter > leftCounter:
+                        leftCounter += 1
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
+
+                        motorleft.backward(0.35)
+                        motorright.forward(0.35)
+                        time.sleep(0.4)
+
+                        motorleft.stop()
+                        motorright.stop()
+                        time.sleep(1)
+                        
     
     except KeyboardInterrupt:
         GPIO.cleanup()
